@@ -34,7 +34,7 @@ public:
 private slots:
     void on_input_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_input_image_button_clicked();
 
 private:
     Ui::MainWindow *ui;

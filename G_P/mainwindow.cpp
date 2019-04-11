@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     curfile=nullptr;
-
+    filename="";
 
 }
 
@@ -27,16 +27,19 @@ m->setText("32434");
 
 }
 
-void MainWindow::on_pushButton_2_clicked()   //检索图像
+void MainWindow::on_input_image_button_clicked()   //检索图像
 {
 
 
          QFileDialog*  fd = new QFileDialog(this);
-         QString        filename = fd->getOpenFileName();
+         filename = fd->getOpenFileName();
 
 
 
-         std::string fileName= (fd->getOpenFileName()).toStdString();
+//         std::string fileName= (fd->getOpenFileName()).toStdString();
+
+
+
 
 //
 //         QImage m1= MatToQImage(cvim);
@@ -45,14 +48,17 @@ void MainWindow::on_pushButton_2_clicked()   //检索图像
 
 
          //自适应检索图像
+    if(filename=="")   //未选择文件直接结束
+    return ;
+
 
            cur_pimg.reset(new QPixmap(filename));              //pimg智能指针
 //        std::unique_ptr<QPixmap>pimg; pimg(new QPixmap(filename));
 
 
-         cur_pimg->scaled(ui->input_image_lable->size(),Qt::KeepAspectRatio);
-         ui->input_image_lable->setScaledContents(true);
-         ui->input_image_lable->setPixmap(*cur_pimg);
+         cur_pimg->scaled(ui->input_image_lable_2->size(),Qt::KeepAspectRatio);
+         ui->input_image_lable_2->setScaledContents(true);
+         ui->input_image_lable_2->setPixmap(*cur_pimg);
 
 
 
