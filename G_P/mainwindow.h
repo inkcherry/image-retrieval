@@ -13,6 +13,7 @@
 #include <opencv2/highgui/highgui_c.h>
 #include <string>
 #include<QMovie>
+#include<QScopedPointer>    //Qt家族的只能指针,用着玩玩
 namespace Ui {
 class MainWindow;
 }
@@ -23,8 +24,11 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    QFile *curfile;
-    QString    filename;
+    QFile *curfile;        //检索图像的文件指针
+    QString    filename;   //检索图像的文件名
+    std::unique_ptr<QPixmap>cur_pimg;
+    std::unique_ptr<cv::Mat>cur_cvmat;
+    std::unique_ptr<QImage>cur_qimg;    //分别用于保存当前的 三种数据机构的检索图像
     ~MainWindow();
 
 private slots:

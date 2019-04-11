@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     curfile=nullptr;
 
+
 }
 
 MainWindow::~MainWindow()
@@ -30,23 +31,48 @@ void MainWindow::on_pushButton_2_clicked()   //检索图像
 {
 
 
-         QFileDialog* fd = new QFileDialog(this);
-         QString    filename = fd->getOpenFileName();
+         QFileDialog*  fd = new QFileDialog(this);
+         QString        filename = fd->getOpenFileName();
 
 
 
-//         std::string fileName= (fd->getOpenFileName()).toStdString();
+         std::string fileName= (fd->getOpenFileName()).toStdString();
 
-//         cv::Mat cvim = cv::imread(fileName);
+//
 //         QImage m1= MatToQImage(cvim);
 //          QImage *input_image = new QImage(m1);
 //         ui->input_image_lable->setPixmap(QPixmap::fromImage(input_image));
 
-         QPixmap * img = new QPixmap(filename);
-         img->scaled(ui->input_image_lable->size(),Qt::KeepAspectRatio);
-         ui->input_image_lable->setScaledContents(true);
-         ui->input_image_lable->setPixmap(*img);
 
+         //自适应检索图像
+
+           cur_pimg.reset(new QPixmap(filename));              //pimg智能指针
+//        std::unique_ptr<QPixmap>pimg; pimg(new QPixmap(filename));
+
+
+         cur_pimg->scaled(ui->input_image_lable->size(),Qt::KeepAspectRatio);
+         ui->input_image_lable->setScaledContents(true);
+         ui->input_image_lable->setPixmap(*cur_pimg);
+
+
+
+//      cur_cvmat.reset(new cv::Mat(cv::imread(fileName)));  //直接使用cv imread读取的图像
+//             cvNamedWindow("window", CV_WINDOW_NORMAL);
+//             imshow("window",*cur_cvmat);
+
+
+
+
+
+//         cur_qimg.reset(new QImage(filename));                    //使用Qimage转换后的图像
+
+//         cur_cvmat.reset(new cv::Mat(QImageToMat(*cur_qimg)));
+//         cvNamedWindow("window", CV_WINDOW_NORMAL);
+//               imshow("window",*cur_cvmat);
+
+         cur_cvmat.reset((new cv::Mat(QPixmapToMat(*cur_pimg))));    //使用qpixmat 转换后的图像
+         cvNamedWindow("window", CV_WINDOW_NORMAL);
+                        imshow("window",*cur_cvmat);
 
 
 

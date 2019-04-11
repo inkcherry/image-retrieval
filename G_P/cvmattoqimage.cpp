@@ -1,7 +1,7 @@
 //实现Qimage和cv::Mat的转化
 #include"cvmattoqimage.h"
 
-cv::Mat QImageToMat(QImage image)
+cv::Mat QImageToMat(QImage& image)
 {
     cv::Mat mat;
     switch (image.format())
@@ -23,7 +23,7 @@ cv::Mat QImageToMat(QImage image)
 }
 
 
-QImage	MatToQImage(cv::Mat mtx)
+QImage	MatToQImage(cv::Mat& mtx)
 {
     switch (mtx.type())
     {
@@ -54,4 +54,14 @@ QImage	MatToQImage(cv::Mat mtx)
     }
 }
 
+QPixmap MatToQpixmat(cv::Mat& mtx)  //这两个是用过Qimage间接转过来的
+{
+    return QPixmap::fromImage( MatToQImage( mtx ) );
+
+}
+cv::Mat QPixmapToMat(QPixmap& pimage)  //这两个是用过Qimage间接转过来的
+{
+     QImage qimg=pimage.toImage();
+    return QImageToMat( qimg );
+}
 
