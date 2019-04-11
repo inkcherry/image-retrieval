@@ -67,10 +67,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    cvmattoqimage.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    cvmattoqimage.h
 
 FORMS += \
         mainwindow.ui
@@ -85,3 +87,5 @@ else:unix: LIBS += -L$$PWD/../../../../opencv/opencv/build/x64/vc15/lib/ -lopenc
 
 INCLUDEPATH += $$PWD/../../../../opencv/opencv/build/include
 DEPENDPATH += $$PWD/../../../../opencv/opencv/build/include
+
+DISTFILES +=

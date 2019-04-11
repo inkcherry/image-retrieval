@@ -6,15 +6,13 @@
 #include <QFile>
 #include <QFileDialog>
 #include<QMessageBox>
-
-
-//INCLUDEPATH += F:/opencv/opencv/build/include\
-
-//#include<opencv2/core.hpp>
-
-//#include "F:/opencv/opencv/build/include\opencv2/core.hpp"
-
-//#include<F:\opencvcontrib\install\include\opencv2\core\core.hpp>
+#include "cvmattoqimage.h"
+#include <QImage>
+#include <QWidget>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui_c.h>
+#include <string>
+#include<QMovie>
 namespace Ui {
 class MainWindow;
 }
@@ -26,6 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     QFile *curfile;
+    QString    filename;
     ~MainWindow();
 
 private slots:

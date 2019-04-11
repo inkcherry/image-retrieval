@@ -115,7 +115,7 @@ border-color: rgb(55, 169, 200);
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="10,0,2">
               <item>
-               <widget class="QLabel" name="label_4">
+               <widget class="QLabel" name="input_image_lable">
                 <property name="styleSheet">
                  <string notr="true">border-width: 3px;
 border-style: solid;
