@@ -47,7 +47,8 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT       += 3drender
+QT       += 3dextras
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = untitled
@@ -68,11 +69,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    cvmattoqimage.cpp
+    cvmattoqimage.cpp \
+    stlloader.cpp
 
 HEADERS += \
         mainwindow.h \
-    cvmattoqimage.h
+    cvmattoqimage.h \
+    stlloader.h
 
 FORMS += \
         mainwindow.ui
@@ -80,7 +83,7 @@ FORMS += \
 #INCLUDEPATH += F:\opencv\opencv\build\include\
 
 
-
+#此处的话添加opencv的库
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../opencv/opencv/build/x64/vc15/lib/ -lopencv_world400
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../opencv/opencv/build/x64/vc15/lib/ -lopencv_world400d
 else:unix: LIBS += -L$$PWD/../../../../opencv/opencv/build/x64/vc15/lib/ -lopencv_world400

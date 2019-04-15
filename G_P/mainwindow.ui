@@ -131,6 +131,17 @@ border-color: rgb(51, 102, 102);
             <item>
              <layout class="QHBoxLayout" name="input_button_2">
               <item>
+               <widget class="QPushButton" name="input_image_button_2">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(51, 153, 204);
+background-color: rgb(51, 153, 204);</string>
+                </property>
+                <property name="text">
+                 <string>载入模型</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="input_image_button">
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(51, 153, 204);
