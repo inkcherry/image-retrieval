@@ -18,8 +18,8 @@ class stlloader : public QObject
     Q_OBJECT
 public:
     QString path;
-    explicit stlloader(Qt3DCore::QEntity *rootEntity,QString& path);
-
+    explicit stlloader(Qt3DCore::QEntity *&rootEntity, Qt3DExtras::Qt3DWindow*&view,QString& path);
+    Qt3DExtras::Qt3DWindow *view;
     ~stlloader();
 
 
