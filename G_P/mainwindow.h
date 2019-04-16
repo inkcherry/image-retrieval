@@ -12,9 +12,12 @@
 #include <QWidget>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui_c.h>
+#include <opencv2/shape.hpp>
 #include <string>
 #include<QMovie>
 #include<QScopedPointer>    //Qt家族的只能指针,用着玩玩
+
+#include "opencv2/imgproc/imgproc.hpp"
 namespace Ui {
 class MainWindow;
 }
@@ -39,6 +42,10 @@ private slots:
     void on_input_image_button_clicked();
 
     void on_input_image_button_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;
