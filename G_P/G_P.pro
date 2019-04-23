@@ -70,12 +70,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     cvmattoqimage.cpp \
-    stlloader.cpp
+    stlloader.cpp \
+    hsv.cpp \
+    unit_test.cpp
 
 HEADERS += \
         mainwindow.h \
     cvmattoqimage.h \
-    stlloader.h
+    stlloader.h \
+    hsv.h
 
 FORMS += \
         mainwindow.ui
