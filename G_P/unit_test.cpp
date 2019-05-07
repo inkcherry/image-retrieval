@@ -4,9 +4,11 @@ using namespace  std;
 using namespace  cv;
 void test_hsv()
 {
-    std::string path="F:\te\3.jpg";
-    hsv *m =new hsv(path);
-    m->show();
+    std::string path="F:\\te\\3.jpg";
+
+
+      hsv *m =new hsv(path);
+      m->show();
 }
 
 void test_fun()

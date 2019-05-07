@@ -195,3 +195,10 @@ void MainWindow::on_pushButton_4_clicked()
 
 
 }
+
+void MainWindow::on_pushButton_5_clicked()
+{
+       std::string path = filename.toStdString();
+       hsv *m=new hsv(path);
+       m->show();
+}

@@ -72,13 +72,15 @@ SOURCES += \
     cvmattoqimage.cpp \
     stlloader.cpp \
     hsv.cpp \
-    unit_test.cpp
+    unit_test.cpp \
+    retrieval.cpp
 
 HEADERS += \
         mainwindow.h \
     cvmattoqimage.h \
     stlloader.h \
-    hsv.h
+    hsv.h \
+    retrieval.h
 
 FORMS += \
         mainwindow.ui

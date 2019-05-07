@@ -34,6 +34,7 @@ public:
     int arr_size_h;
     int arr_size_s;
     int arr_size_v;
+
     void show();
 };
 

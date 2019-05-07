@@ -17,7 +17,7 @@ hsv::hsv(std::string &path)
    }
    else {
 
-    cur_image = cvLoadImage("F:\\te\\3.jpg");
+    cur_image = cvLoadImage(path.c_str());
     CvSize size=cvSize((*cur_image).width,((*cur_image)).height);
      hsv_img = cvCreateImage(size, 8,3);  //这里有个bug，好像是编译优化导致的。有时间看看，就是这里如果不用size变量间接creat会崩。
 
