@@ -38,13 +38,26 @@ hsv::hsv(std::string &path)
 
 
     //创建H通道的直方图
-     arr_size_h = 255;                 //定义一个变量用于表示直方图行宽
+     arr_size_h = 5;                 //定义一个变量用于表示直方图行宽
     float hranges_arr_h[] = { 0, 180 };       //图像方块范围数组
+
+
     float *phranges_arr_h = hranges_arr_h;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
-    hist_h = cvCreateHist(1, &arr_size_h, CV_HIST_ARRAY, &phranges_arr_h, 1);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-180，bin均化
+
+
+//    int arrh[10]={0,50,50,100,100,200,200,254,254,255}; //蠢到极点，这里完全理解错range参数的意义了
+
+//    init_and_get_range(arrh,H);    //蠢到极点，这里完全理解错range参数的意义了
+
+
+    float range_hn[6]={0,5,10,15,20,255};
+    range_h=range_hn;
+    hist_h = cvCreateHist(1, &arr_size_h, CV_HIST_ARRAY, &range_h, 0);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-180，bin均化
+
+
 
     //创建S通道的直方图
-     arr_size_s = 255;                 //定义一个变量用于表示直方图行宽
+    arr_size_s = 255;                 //定义一个变量用于表示直方图行宽
     float hranges_arr_s[] = { 0, 255 };       //图像方块范围数组
     float *phranges_arr_s = hranges_arr_s;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
     hist_s = cvCreateHist(1, &arr_size_s, CV_HIST_ARRAY, &phranges_arr_s, 1);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-255，bin均化
@@ -84,9 +97,9 @@ hsv::hsv(std::string &path)
 }
 void hsv::show()
 {
-      int arr_size_h=100;
-      int arr_size_s=100;
-      int arr_size_v=100;
+//      int arr_size_h=100;
+//      int arr_size_s=100;
+//      int arr_size_v=100;
     //创建一个空白图像用于绘制直方图
         IplImage *histimg = cvCreateImage(cvSize(320, 200), 8, 3);
         cvZero(histimg);    //清空histimag-imagedata数据
@@ -150,3 +163,50 @@ void hsv::show()
            cv::waitKey(0);
 
 }
+hsv::~hsv()
+{
+
+    delete cur_image;
+    delete hsv_img;
+    delete image_h;
+    delete image_s;
+    delete image_v;
+    delete hist_h;
+    delete hist_s;
+    delete hist_v;
+
+}
+
+//void hsv::init_and_get_range(int *arr,hist_type htype)  //这里 也把range给初始化了
+//{
+
+
+
+//    int index=0;
+//    auto iagr=[&](float**&range,int size,int*arr){   //这里别忘了加&  反正只在中括号加&不是按引用传值的
+//        range=new float*[size];
+//        for(int i=0;i<size;i++)
+//        {
+//               range[i]=new float[2];
+
+//               range[i][0]=arr[index++];
+//               range[i][1]=arr[index++];
+//        }
+//    };
+
+//    switch (htype){
+//    case hsv::H:
+//       iagr(range_h,arr_size_h,arr);
+//       break;
+//    case hsv::S:
+//       iagr(range_s,arr_size_s,arr);
+//       break;
+//    case hsv::V:
+//       iagr(range_v,arr_size_v,arr);
+//       break;
+//    default:
+//        break;
+//    }
+
+
+//}
