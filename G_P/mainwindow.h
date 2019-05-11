@@ -19,6 +19,7 @@
 #include "hsv.h"
 #include "opencv2/imgproc/imgproc.hpp"
 #include <retrieval.h>
+#include <list>
 namespace Ui {
 class MainWindow;
 }
@@ -32,9 +33,11 @@ public:
     QFile *curfile;        //检索图像的文件指针
     QString    filename;   //检索图像的文件名
     QString  stlfilename;    //3d模型文件名字
+    int search_num;         //检索的数量。
     std::unique_ptr<QPixmap>cur_pimg;
     std::unique_ptr<cv::Mat>cur_cvmat;
     std::unique_ptr<QImage>cur_qimg;    //分别用于保存当前的 三种数据机构的检索图像
+    std::list<QLabel*>result_list;
     ~MainWindow();
 
 private slots:

@@ -11,6 +11,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     curfile=nullptr;
     filename="";
+    result_list.push_back(ui->R1);
+    result_list.push_back(ui->R2);
+    result_list.push_back(ui->R3);
+    result_list.push_back(ui->R4);
+    result_list.push_back(ui->R5);
+    result_list.push_back(ui->R6);
+    result_list.push_back(ui->R7);
+    result_list.push_back(ui->R8);
+    result_list.push_back(ui->R9);
 
 }
 
@@ -205,13 +214,69 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
+
     std::string path = filename.toStdString();
 
     hsv *main_hsv=new hsv(path);
-    main_hsv->show();
+
+//    main_hsv->show();
+
     QString  text=ui->input_count_2->text();
-    int num = text.toInt();
+    int num=3;
+//    num = text.toInt();
+
+
     retrieval *ret=new retrieval(main_hsv,num);
     ret->retr();
-    ret->show();
+//    ret->show(); //debug
+    std::multiset<img_node*,img_cmp>img_list=ret->get_img_list();
+    int cnt=0;
+
+
+    QLabel * temp=nullptr;
+    auto lable_list_it=result_list.begin();
+
+    auto hsv_list_it=img_list.begin();
+
+
+
+    for(auto it=img_list.begin();it!=img_list.end();++it)
+    {
+        std::string debugstr=(*it)->node.second->filepath;
+        std::string disstr = std::to_string((*it)->node.first);
+
+
+        qDebug() << QString::fromStdString(debugstr)<<" "<<QString::fromStdString(disstr)<<endl;
+        cnt++;
+        if(cnt==num)
+            break;
+    }
+
+    cnt=0;
+
+
+
+
+    for(;;)
+    {
+
+
+
+         QString temp_Qstr = QString::fromStdString((*hsv_list_it)->node.second->filepath);
+//        std::string for_test=temp_Qstr.toStdString();
+         QPixmap *temp_pimg=new QPixmap(temp_Qstr);              //pimg智能指针
+
+
+        temp_pimg->scaled((*lable_list_it)->size(),Qt::KeepAspectRatio);
+        (*lable_list_it)->setScaledContents(true);
+        (*lable_list_it)->setPixmap(*temp_pimg);
+
+
+        cnt++;
+        if(cnt==num)
+            break;
+        ++lable_list_it;
+        hsv_list_it++;
+    }
+
 }
