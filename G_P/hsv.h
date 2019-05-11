@@ -21,7 +21,11 @@ class hsv
 
 public:
     enum hist_type{H,S,V};
-    hsv(std::string &path);
+    std::string filepath;
+    explicit hsv(std::string&&path);
+    explicit hsv(const std::string path);
+    void _init();
+
 //    std::unique_ptr<IplImage> *hsv_img;
     IplImage *cur_image;
     IplImage *hsv_img;

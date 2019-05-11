@@ -18,6 +18,7 @@
 #include<QScopedPointer>    //Qt家族的只能指针,用着玩玩
 #include "hsv.h"
 #include "opencv2/imgproc/imgproc.hpp"
+#include <retrieval.h>
 namespace Ui {
 class MainWindow;
 }

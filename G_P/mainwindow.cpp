@@ -206,6 +206,12 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::on_pushButton_6_clicked()
 {
     std::string path = filename.toStdString();
-    hsv *m=new hsv(path);
-    m->show();
+
+    hsv *main_hsv=new hsv(path);
+    main_hsv->show();
+    QString  text=ui->input_count_2->text();
+    int num = text.toInt();
+    retrieval *ret=new retrieval(main_hsv,num);
+    ret->retr();
+    ret->show();
 }

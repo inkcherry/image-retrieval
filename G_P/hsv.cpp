@@ -6,18 +6,21 @@
 #include<iostream>
 #include <QMainWindow>
 #include "hsv.h"
+hsv::hsv(std::string &&path):filepath(std::move(path))
+{
+  _init();
+}
+hsv::hsv(const std::string path):filepath(path)
+{
+  _init();
+}
 
-hsv::hsv(std::string &path)
+void hsv::_init()
 {
 
-   if(path =="")
-     {  return ;  //做个错误处理把
 
 
-   }
-   else {
-
-    cur_image = cvLoadImage(path.c_str());
+    cur_image = cvLoadImage(filepath.c_str());
     CvSize size=cvSize((*cur_image).width,((*cur_image)).height);
      hsv_img = cvCreateImage(size, 8,3);  //这里有个bug，好像是编译优化导致的。有时间看看，就是这里如果不用size变量间接creat会崩。
 
@@ -39,10 +42,10 @@ hsv::hsv(std::string &path)
 
     //创建H通道的直方图
      arr_size_h = 5;                 //定义一个变量用于表示直方图行宽
-    float hranges_arr_h[] = { 0, 180 };       //图像方块范围数组
+ /*   float hranges_arr_h[] = { 0, 180 };       //图像方块范围数组
 
 
-    float *phranges_arr_h = hranges_arr_h;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
+    float *phranges_arr_h = hranges_arr_h;  */    //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
 
 
 //    int arrh[10]={0,50,50,100,100,200,200,254,254,255}; //蠢到极点，这里完全理解错range参数的意义了
@@ -56,19 +59,41 @@ hsv::hsv(std::string &path)
 
 
 
-    //创建S通道的直方图
-    arr_size_s = 255;                 //定义一个变量用于表示直方图行宽
-    float hranges_arr_s[] = { 0, 255 };       //图像方块范围数组
-    float *phranges_arr_s = hranges_arr_s;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
-    hist_s = cvCreateHist(1, &arr_size_s, CV_HIST_ARRAY, &phranges_arr_s, 1);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-255，bin均化
 
-    //创建V通道的直方图
-     arr_size_v = 255;                 //定义一个变量用于表示直方图行宽
-    float hranges_arr_v[] = { 0, 255 };       //图像方块范围数组
-    float *phranges_arr_v = hranges_arr_v;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
-    hist_v = cvCreateHist(1, &arr_size_v, CV_HIST_ARRAY, &phranges_arr_v, 1);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-255，bin均化
+    arr_size_s=5;
+
+
+
+    float range_sn[6]={0,5,10,15,20,255};
+    range_s=range_sn;
+    hist_s = cvCreateHist(1, &arr_size_s, CV_HIST_ARRAY, &range_s, 0);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-180，bin均化
+
+
+
+
+    arr_size_v=5;
+
+
+
+    float range_vn[6]={0,5,10,15,20,255};
+    range_v=range_vn;
+    hist_v = cvCreateHist(1, &arr_size_v, CV_HIST_ARRAY, &range_v, 0);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-180，bin均化
+
+
+//这里是均匀化的方法
+            //    //创建V通道的直方图
+            //     arr_size_v = 255;                 //定义一个变量用于表示直方图行宽
+            //    float hranges_arr_v[] = { 0, 255 };       //图像方块范围数组
+            //    float *phranges_arr_v = hranges_arr_v;      //cvCreateHist参数是一个二级指针，所以要用指针指向数组然后传参
+            //    hist_v = cvCreateHist(1, &arr_size_v, CV_HIST_ARRAY, &phranges_arr_v, 1);    //创建一个一维的直方图，行宽为255，多维密集数组，方块范围为0-255，bin均化
+//
+
+
+
 
      //计算H通道的直方图大小
+
+
 
     cvCalcHist(&image_h,hist_h, 0, 0);
     //计算S通道的直方图大小
@@ -93,7 +118,7 @@ hsv::hsv(std::string &path)
     cvConvertScale(hist_v->bins, hist_v->bins, max_val_v ? 255 / max_val_v : 0., 0);  //按比例缩小直方图
 
 
-   }
+
 }
 void hsv::show()
 {
