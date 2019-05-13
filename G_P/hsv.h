@@ -46,6 +46,7 @@ public:
     int arr_size_v;
 
     void show();
+    void showdetail(); //255显示真实信息
 //    void init_and_get_range(int *arr,hist_type type);   //通过type 拿到arr_size_*   然后根据一维数组确定区间 ps:完全弄错了
     ~hsv();
 };

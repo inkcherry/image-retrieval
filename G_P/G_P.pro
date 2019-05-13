@@ -97,3 +97,6 @@ INCLUDEPATH += $$PWD/../../../../opencv/opencv/build/include
 DEPENDPATH += $$PWD/../../../../opencv/opencv/build/include
 
 DISTFILES +=
+
+RESOURCES += \
+    imgsrc.qrc

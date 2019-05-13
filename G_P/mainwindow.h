@@ -20,6 +20,7 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include <retrieval.h>
 #include <list>
+#include<QTextCodec>
 namespace Ui {
 class MainWindow;
 }
@@ -38,6 +39,7 @@ public:
     std::unique_ptr<cv::Mat>cur_cvmat;
     std::unique_ptr<QImage>cur_qimg;    //分别用于保存当前的 三种数据机构的检索图像
     std::list<QLabel*>result_list;
+    std::list<QLabel*>text_list;
     ~MainWindow();
 
 private slots:

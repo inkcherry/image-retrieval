@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/tit.ico</file>
+        <file>src/tit.png</file>
+        <file>src/3dtit.png</file>
+    </qresource>
+</RCC>

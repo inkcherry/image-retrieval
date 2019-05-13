@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1234</width>
-    <height>656</height>
+    <width>1702</width>
+    <height>878</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>医学影像检索系统v1.0                Inkc</string>
+   <string>医学影像检索系统v1.0              刘铭志</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="imgsrc.qrc">
+    <normaloff>:/src/tit.ico</normaloff>:/src/tit.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">color:rgb(255, 255, 255)</string>
@@ -54,30 +58,36 @@ border-color: rgb(55, 169, 200);
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
-        <widget class="QWidget" name="layoutWidget">
+        <widget class="QWidget" name="widget" native="true">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>321</width>
-           <height>561</height>
+           <width>471</width>
+           <height>791</height>
           </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
          </property>
          <layout class="QVBoxLayout" name="inpuy" stretch="1,20,2">
           <property name="spacing">
            <number>0</number>
           </property>
           <property name="leftMargin">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="topMargin">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="rightMargin">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="bottomMargin">
-           <number>0</number>
+           <number>1</number>
           </property>
           <item>
            <layout class="QHBoxLayout" name="input_title">
@@ -332,8 +342,8 @@ background-color: rgb(51, 153, 204);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>851</width>
-           <height>561</height>
+           <width>1191</width>
+           <height>791</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="output_main" stretch="1,20,0">
@@ -393,8 +403,8 @@ background-color: rgb(51, 153, 204);</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>851</width>
-               <height>511</height>
+               <width>1181</width>
+               <height>721</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="out_put_image" stretch="1,1,1">
@@ -408,7 +418,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_3">
+                 <widget class="QLabel" name="T1">
                   <property name="text">
                    <string/>
                   </property>
@@ -422,7 +432,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_6">
+                 <widget class="QLabel" name="T4">
                   <property name="text">
                    <string/>
                   </property>
@@ -436,7 +446,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_7">
+                 <widget class="QLabel" name="T7">
                   <property name="text">
                    <string/>
                   </property>
@@ -454,7 +464,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_9">
+                 <widget class="QLabel" name="T2">
                   <property name="text">
                    <string/>
                   </property>
@@ -468,14 +478,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_10">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_11">
+                 <widget class="QLabel" name="T5">
                   <property name="text">
                    <string/>
                   </property>
@@ -483,6 +486,13 @@ background-color: rgb(51, 153, 204);</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="R8">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="T8">
                   <property name="text">
                    <string/>
                   </property>
@@ -500,7 +510,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_12">
+                 <widget class="QLabel" name="T3">
                   <property name="text">
                    <string/>
                   </property>
@@ -514,7 +524,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_13">
+                 <widget class="QLabel" name="T6">
                   <property name="text">
                    <string/>
                   </property>
@@ -528,7 +538,7 @@ background-color: rgb(51, 153, 204);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_14">
+                 <widget class="QLabel" name="T9">
                   <property name="text">
                    <string/>
                   </property>
@@ -565,13 +575,15 @@ background-color: rgb(51, 153, 204);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1234</width>
+     <width>1702</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="imgsrc.qrc"/>
+ </resources>
  <connections/>
 </ui>

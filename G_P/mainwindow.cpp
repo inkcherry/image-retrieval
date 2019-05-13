@@ -21,6 +21,16 @@ MainWindow::MainWindow(QWidget *parent) :
     result_list.push_back(ui->R8);
     result_list.push_back(ui->R9);
 
+    text_list.push_back(ui->T1);
+    text_list.push_back(ui->T2);
+    text_list.push_back(ui->T3);
+    text_list.push_back(ui->T4);
+    text_list.push_back(ui->T5);
+    text_list.push_back(ui->T6);
+    text_list.push_back(ui->T7);
+    text_list.push_back(ui->T8);
+    text_list.push_back(ui->T9);
+
 }
 
 MainWindow::~MainWindow()
@@ -209,7 +219,7 @@ void MainWindow::on_pushButton_5_clicked()
 {
        std::string path = filename.toStdString();
        hsv *m=new hsv(path);
-       m->show();
+       m->showdetail();
 }
 
 void MainWindow::on_pushButton_6_clicked()
@@ -222,8 +232,7 @@ void MainWindow::on_pushButton_6_clicked()
 //    main_hsv->show();
 
     QString  text=ui->input_count_2->text();
-    int num=3;
-//    num = text.toInt();
+    int  num = text.toInt();
 
 
     retrieval *ret=new retrieval(main_hsv,num);
@@ -238,21 +247,21 @@ void MainWindow::on_pushButton_6_clicked()
 
     auto hsv_list_it=img_list.begin();
 
+    auto text_list_it=text_list.begin();
+
+//    for(auto it=img_list.begin();it!=img_list.end();++it)
+//    {
+//        std::string debugstr=(*it)->node.second->filepath;
+//        std::string disstr = std::to_string((*it)->node.first);
 
 
-    for(auto it=img_list.begin();it!=img_list.end();++it)
-    {
-        std::string debugstr=(*it)->node.second->filepath;
-        std::string disstr = std::to_string((*it)->node.first);
+//        qDebug() << QString::fromStdString(debugstr)<<" "<<QString::fromStdString(disstr)<<endl;
+//        cnt++;
+//        if(cnt==num)
+//            break;
+//    }
 
-
-        qDebug() << QString::fromStdString(debugstr)<<" "<<QString::fromStdString(disstr)<<endl;
-        cnt++;
-        if(cnt==num)
-            break;
-    }
-
-    cnt=0;
+//    cnt=0;
 
 
 
@@ -272,11 +281,24 @@ void MainWindow::on_pushButton_6_clicked()
         (*lable_list_it)->setPixmap(*temp_pimg);
 
 
+//        std::string disstr = std::to_string((*it)->node.first);
+
+//        QString d1=QString::fromLocal8Bit("差异度：");
+
+//       QString d1=QStringLiteral("我是中文");
+//        QString d1=QString::fromWCharArray(L"测试中文");
+//        QString d1=QString::fromLocal8Bit("测试中文");
+        QString d1= "差异度：";
+        QString distext=QString::fromStdString(std::to_string((*hsv_list_it)->node.first));
+
+        (*text_list_it)->setText(d1+distext);
+
         cnt++;
         if(cnt==num)
             break;
         ++lable_list_it;
-        hsv_list_it++;
+        ++hsv_list_it;
+        ++text_list_it;
     }
 
 }

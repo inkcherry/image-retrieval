@@ -60,6 +60,10 @@ void stlloader::show()
 
 
     view->setRootEntity(m_rootEntity);
+    QString tit=tr("医学三维影像查看器刘铭志");
 
+    view->setTitle(tit);
+    QIcon *ic=new QIcon(":/src/3dtit.png");
+    view->setIcon(*ic);
     view->show();
 }
