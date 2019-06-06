@@ -73,14 +73,16 @@ SOURCES += \
     stlloader.cpp \
     hsv.cpp \
     unit_test.cpp \
-    retrieval.cpp
+    retrieval.cpp \
+    clicklable.cpp
 
 HEADERS += \
         mainwindow.h \
     cvmattoqimage.h \
     stlloader.h \
     hsv.h \
-    retrieval.h
+    retrieval.h \
+    clicklable.h
 
 FORMS += \
         mainwindow.ui

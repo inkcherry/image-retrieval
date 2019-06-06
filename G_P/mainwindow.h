@@ -21,6 +21,7 @@
 #include <retrieval.h>
 #include <list>
 #include<QTextCodec>
+#include<clicklable.h>
 namespace Ui {
 class MainWindow;
 }
