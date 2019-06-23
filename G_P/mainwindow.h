@@ -22,6 +22,11 @@
 #include <list>
 #include<QTextCodec>
 #include<clicklable.h>
+#include<QMouseEvent>
+#include<map>
+#include<cctype>
+#include<string>
+#include<QDesktopServices>
 namespace Ui {
 class MainWindow;
 }
@@ -39,8 +44,12 @@ public:
     std::unique_ptr<QPixmap>cur_pimg;
     std::unique_ptr<cv::Mat>cur_cvmat;
     std::unique_ptr<QImage>cur_qimg;    //分别用于保存当前的 三种数据机构的检索图像
-    std::list<QLabel*>result_list;
-    std::list<QLabel*>text_list;
+    std::list<QLabel*>result_list;    //hsv list
+    std::list<QLabel*>text_list;      //distance list
+    std::map<QLabel*,int>show_map;    //lable click
+    bool have_result[9];    //用于记录这个label是否有图片，以标志点击事件是否有效
+    retrieval *ret;
+    std::multiset<img_node*,img_cmp>img_list;
     ~MainWindow();
 
 private slots:
@@ -58,8 +67,12 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+//    void on_R_clicked();
+
 private:
     Ui::MainWindow *ui;
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // MAINWINDOW_H

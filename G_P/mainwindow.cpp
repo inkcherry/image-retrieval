@@ -21,6 +21,21 @@ MainWindow::MainWindow(QWidget *parent) :
     result_list.push_back(ui->R8);
     result_list.push_back(ui->R9);
 
+    using namespace std;
+
+
+    show_map.insert(pair<QLabel*,int>(ui->R1,1));
+    show_map.insert(pair<QLabel*,int>(ui->R2,2));
+    show_map.insert(pair<QLabel*,int>(ui->R3,3));
+    show_map.insert(pair<QLabel*,int>(ui->R4,4));
+    show_map.insert(pair<QLabel*,int>(ui->R5,5));
+    show_map.insert(pair<QLabel*,int>(ui->R6,6));
+    show_map.insert(pair<QLabel*,int>(ui->R7,7));
+    show_map.insert(pair<QLabel*,int>(ui->R8,8));
+    show_map.insert(pair<QLabel*,int>(ui->R9,9));
+
+//    connect(ui->R1 , SIGNAL(linkActivated(QString)), this, SLOT(on_R_clicked()));
+
     text_list.push_back(ui->T1);
     text_list.push_back(ui->T2);
     text_list.push_back(ui->T3);
@@ -31,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent) :
     text_list.push_back(ui->T8);
     text_list.push_back(ui->T9);
 
+    for(auto i =result_list.begin();i!=result_list.end();++i)
+      (*i)->installEventFilter(this);//安装事件过滤器
+    for(int i=0;i<9;i++)
+        have_result[i]=0;
 }
 
 MainWindow::~MainWindow()
@@ -224,6 +243,8 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
+    for(int i=0;i<9;i++)
+        have_result[i]=0;
 
     std::string path = filename.toStdString();
 
@@ -235,14 +256,14 @@ void MainWindow::on_pushButton_6_clicked()
     int  num = text.toInt();
 
 
-    retrieval *ret=new retrieval(main_hsv,num);
+    ret=new retrieval(main_hsv,num);
     ret->retr();
 //    ret->show(); //debug
-    std::multiset<img_node*,img_cmp>img_list=ret->get_img_list();
+    img_list=ret->get_img_list();
     int cnt=0;
 
 
-    QLabel * temp=nullptr;
+//    QLabel * temp=nullptr;
     auto lable_list_it=result_list.begin();
 
     auto hsv_list_it=img_list.begin();
@@ -292,7 +313,7 @@ void MainWindow::on_pushButton_6_clicked()
         QString distext=QString::fromStdString(std::to_string((*hsv_list_it)->node.first));
 
         (*text_list_it)->setText(d1+distext);
-
+        have_result[cnt]=true;
         cnt++;
         if(cnt==num)
             break;
@@ -302,3 +323,116 @@ void MainWindow::on_pushButton_6_clicked()
     }
 
 }
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)//这是Qobject一个虚函数
+{
+    if (obj == ui->R1||obj == ui->R2||obj == ui->R3||obj == ui->R4||obj == ui->R5||obj == ui->R6||obj == ui->R7||obj == ui->R8||obj == ui->R9)
+  {
+      if (event->type() == QEvent::MouseButtonPress)//mouse button pressed
+      {
+//          QMouseEvent *mouseEvent=event;
+
+          QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(event);
+//          QMouseEvent*mouseEvent=(QMouseEvent*)event;
+//          QMouseEvent *mouseEvent=event;
+          if(mouseEvent->button() == Qt::LeftButton)
+          {
+//
+              auto iter=show_map.find((QLabel*)obj);
+              int index=iter->second;
+
+//                      std::string test_index = std::to_string(index);    pass
+
+//                QString wc=QString::fromStdString(test_index);
+//                      QMessageBox::information(NULL,"点击",wc,
+//                       QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+
+
+
+
+                if (have_result[index]=false)    //这个label没有图像
+                return false;
+              auto hsv_list_it=img_list.begin();
+
+
+            for(int i=1;i<index;i++)
+            {
+                  hsv_list_it++;
+            }
+
+
+
+            QString temp_Qstr = QString::fromStdString((*hsv_list_it)->node.second->filepath);
+
+            std::string temp_str=temp_Qstr .toStdString();
+
+
+//            QString temp_Qstr_index = Qstr;
+//                        QMessageBox::information(NULL,"点击",temp_Qstr,
+//                         QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+
+            int st =0,en=0;
+            for(int i=0;i<temp_str.size();++i)
+            {
+                        if(isdigit(temp_str[i]))
+                        {st=i;
+                        break;
+                        }
+            }
+
+            for(int i=st;i<temp_str.size();++i)
+            {
+                        if(!isdigit(temp_str[i]))
+                        {en=i-1;
+                        break;
+                        }
+            }
+            int len=en-st+1;
+            std::string path_index=temp_str.substr(st,len);
+
+//            QString path_Qindex = QString::fromStdString(path_index);
+//            QMessageBox::information(NULL,"点击",path_Qindex,
+//             QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+
+
+
+
+            QDesktopServices::openUrl;
+            QString md_url=QString::fromStdString("F:/3ddatabase/md"+path_index);
+            QDesktopServices::openUrl(QUrl(md_url, QUrl::TolerantMode)); //打不开有空格或者共享的
+
+//            QDesktopServices::openUrl(QUrl("file:C:/111", QUrl::TolerantMode));
+
+
+//              QString temp = QString::number(index);
+
+
+//              auto click_dilog_hsv = result_list[index];
+
+//             QMessageBox::information(NULL,"点击",temp,
+//             QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+              return true;
+          }
+          else
+          {
+              return false;
+          }
+      }
+      else
+      {
+          return false;
+      }
+  }
+  else
+  {
+      // pass the event on to the parent class
+      return QMainWindow::eventFilter(obj, event);
+  }
+
+}
+
+//void MainWindow::on_R_clicked(){
+//    QMessageBox *m=new QMessageBox();
+//    m->setText("3234");
+
+//    m->show();
+//}

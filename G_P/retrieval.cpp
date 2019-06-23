@@ -27,7 +27,7 @@ void retrieval::retr()
 
     int dis_all=0;
 
-    for(int i=0;i<=9;i++)
+    for(int i=0;i<=28;i++)
     {
         std::string path = (basepath+"kk"+std::to_string(i)+".jpg");
 

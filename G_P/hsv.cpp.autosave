@@ -38,7 +38,7 @@ void hsv::_init()
         IplImage *ps=cvCreateImage(ds,cur_image->depth,cur_image->nChannels);
             cvResize(cur_image, ps, CV_INTER_CUBIC);
             cur_image=ps;
-            int b=3;
+//            int b=3;
     }
 
     CvSize size=cvSize((*cur_image).width,((*cur_image)).height);

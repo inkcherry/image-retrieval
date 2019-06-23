@@ -13,7 +13,8 @@ public:
 
     ~clicklabel(){}
 signals:
-    void click(clicklabel* clicked);
+   void  clicklabel::qlclick(clicklabel *clicked);
+
 
 protected:
     void mouseReleaseEvent( QMouseEvent* );
